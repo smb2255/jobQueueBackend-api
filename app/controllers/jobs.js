@@ -24,6 +24,7 @@ const show = (req, res) => {
 }
 
 const create = (req, res, next) => {
+  console.log('in create')
   const job = Object.assign(req.body.job, {
     html: null
   })
@@ -34,11 +35,18 @@ const create = (req, res, next) => {
       job.status('complete')
       .then(job.update())
         .json({
-          job: job.toJSON({ virtuals: true, user: req.user })
+          job: job.toJSON
+          // ({ virtuals: true, user: req.user })
         }))
     // .catch(next)
 }
+const update = (req, res, next) => {
+  delete req.body.item
 
+  req.item.update(req.body.item)
+    .then(() => res.sendStatus(204))
+    .catch(next)
+}
 
 const destroy = (req, res, next) => {
   req.job.remove()
