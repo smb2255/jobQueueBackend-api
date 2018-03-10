@@ -24,17 +24,21 @@ const show = (req, res) => {
 }
 
 const create = (req, res, next) => {
-  const job = Object.assign(req.body.item, {
-    _owner: req.user._id
+  const job = Object.assign(req.body.job, {
+    html: null
   })
   Job.create(job)
-    .then(item =>
-      res.status(201)
+    .then(job => (how do i make a GET request here to get the job.url?)
+      job.status('pending')
+      .then(html => job.html = html)
+      job.status('complete')
+      .then(job.update())
         .json({
           job: job.toJSON({ virtuals: true, user: req.user })
         }))
-    .catch(next)
+    // .catch(next)
 }
+
 
 const destroy = (req, res, next) => {
   req.job.remove()
