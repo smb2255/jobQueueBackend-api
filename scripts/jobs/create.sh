@@ -2,6 +2,8 @@
 
 API="http://localhost:4741"
 URL_PATH="/jobs"
+TITLE="testing title"
+URL="www.google.com"
 
 curl "${API}${URL_PATH}" \
   --include \
@@ -12,7 +14,6 @@ curl "${API}${URL_PATH}" \
     "job": {
       "title": "'"${TITLE}"'",
       "url": "'"${URL}"'",
-
     }
   }'
 
