@@ -17,6 +17,13 @@ const create = (req, res, next) => {
     .catch(next)
 }
 
+const show = (req, res) => {
+  res.json({
+    job: req.job.toJSON()
+    // item: req.item.toJSON({ virtuals: true, user: req.user })
+  })
+}
+
 module.exports = controller({
   create
 })
