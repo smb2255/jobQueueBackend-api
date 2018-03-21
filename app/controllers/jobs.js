@@ -17,13 +17,18 @@ const create = (req, res, next) => {
     .catch(next)
 }
 
-const show = (req, res) => {
-  res.json({
-    job: req.job.toJSON()
-    // item: req.item.toJSON({ virtuals: true, user: req.user })
+const index = (req, res) => {
+  const job = Object.assign(req.body, {
   })
+  console.log(job)
+  Job.find({url: job.URL})
+    .then(jobs => res.json({
+      jobs: jobs.map((e) =>
+        e.toJSON())
+    }))
 }
 
 module.exports = controller({
-  create
+  create,
+  index
 })
