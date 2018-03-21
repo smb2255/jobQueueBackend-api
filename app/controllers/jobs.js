@@ -5,14 +5,14 @@ const models = require('app/models')
 const Job = models.jobs
 
 const create = (req, res, next) => {
-  const job = Object.assign(req.body.job, {
+  const job = Object.assign(req.body, {
   })
-  Job.create(job)
+  console.log(job)
+  Job.create({url: job.URL})
     .then(job =>
       res.status(201)
         .json({
           job: job.toJSON()
-          // ({ virtuals: true, user: req.user })
         }))
     .catch(next)
 }
